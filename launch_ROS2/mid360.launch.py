@@ -41,9 +41,6 @@ def generate_launch_description():
         name='livox_lidar_publisher',
         output='screen',
         parameters=livox_ros2_params,
-        env={
-        'LD_LIBRARY_PATH': '/root/ros2_ws/install/livox_ros_driver2/lib:' + os.environ.get('LD_LIBRARY_PATH', '')
-        }
     )
 
     # 2. ros2 bag record 실행
@@ -54,7 +51,8 @@ def generate_launch_description():
             '/livox/lidar'
         ],
         cwd='/workspace/bags',   # ← 작업 디렉토리 지정
-        output='screen'
+        output='screen',
+        additional_env={"ROS_LOG_DIR": "/tmp/ros_logs"}
     )
 
     # 3. Launch 종료 시 ros2 bag 정상 종료
