@@ -15,7 +15,7 @@ lvx_file_path = '/home/livox/livox_test.lvx'
 cmdline_bd_code = 'livox0000000001'
 
 cur_path = os.path.split(os.path.realpath(__file__))[0] + '/'
-cur_config_path = cur_path + '../config'
+cur_config_path = cur_path + '../../config'
 user_config_path = os.path.join(cur_config_path, 'MID360_config.json')
 ################### user configure parameters for ros2 end #####################
 
@@ -41,6 +41,9 @@ def generate_launch_description():
         name='livox_lidar_publisher',
         output='screen',
         parameters=livox_ros2_params,
+        #env={
+        #'LD_LIBRARY_PATH': '/root/ros2_ws/install/livox_ros_driver2/lib:' + os.environ.get('LD_LIBRARY_PATH', '')
+        #}
     )
 
     # 2. ros2 bag record 실행
@@ -51,8 +54,7 @@ def generate_launch_description():
             '/livox/lidar'
         ],
         cwd='/workspace/bags',   # ← 작업 디렉토리 지정
-        output='screen',
-        additional_env={"ROS_LOG_DIR": "/tmp/ros_logs"}
+        output='screen'
     )
 
     # 3. Launch 종료 시 ros2 bag 정상 종료
@@ -69,7 +71,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         livox_driver,
-        bag_record,
-        kill_bag_on_exit
+        #bag_record,
+        #kill_bag_on_exit
     ])
 
