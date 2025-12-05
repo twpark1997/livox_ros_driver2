@@ -37,10 +37,14 @@ import rs_launch
 
 local_parameters = [{'name': 'camera_name1', 'default': 'cam1', 'description': 'camera1 unique name'},
                     {'name': 'camera_name2', 'default': 'cam2', 'description': 'camera2 unique name'},
-                    #{'name': 'camera_namespace1', 'default': 'cam1', 'description': 'camera1 namespace'},
-                    #{'name': 'camera_namespace2', 'default': 'cam2', 'description': 'camera2 namespace'},
-                    {'name': 'serial_no1',                    'default': "'332322073714'", 'description': 'choose device by serial number'},
-                    {'name': 'serial_no2',                    'default': "'025222071132'", 'description': 'choose device by serial number'},
+                    {'name': 'rgb_camera1.color_profile',     'default': '848,480,30', 'description': 'color stream profile'},
+                    {'name': 'rgb_camera2.color_profile',     'default': '848,480,30', 'description': 'color stream profile'},
+                    {'name': 'depth_module1.depth_profile1',   'default': '848,480,30', 'description': 'depth stream profile'},
+                    {'name': 'depth_module2.depth_profile2',   'default': '848,480,30', 'description': 'depth stream profile'},
+                    #{'name': 'align_depth1.enable',           'default': 'true', 'description': 'enable align depth filter'},
+                    #{'name': 'align_depth2.enable',           'default': 'true', 'description': 'enable align depth filter'},
+                    #{'name': 'serial_no1',                    'default': "'332322073714'", 'description': 'choose device by serial number'},
+                    #{'name': 'serial_no2',                    'default': "'025222071132'", 'description': 'choose device by serial number'},
                     ]
 
 def yaml_to_dict(path_to_yaml):
@@ -88,9 +92,9 @@ def generate_launch_description():
         rs_launch.declare_configurable_parameters(params1) +
         rs_launch.declare_configurable_parameters(params2) +
         [
-        OpaqueFunction(function=rs_launch.launch_setup,
-                       kwargs = {'params'           : set_configurable_parameters(params1),
-                                 'param_name_suffix': '1'}),
+        #OpaqueFunction(function=rs_launch.launch_setup,
+        #               kwargs = {'params'           : set_configurable_parameters(params1),
+        #                         'param_name_suffix': '1'}),
         OpaqueFunction(function=rs_launch.launch_setup,
                        kwargs = {'params'           : set_configurable_parameters(params2),
                                  'param_name_suffix': '2'}),

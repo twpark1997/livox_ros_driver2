@@ -1,0 +1,4 @@
+mcap:
+  compression: 'Zstd'
+  compression_level: 1
+  include_metadata: true
